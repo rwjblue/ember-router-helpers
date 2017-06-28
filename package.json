@@ -1,17 +1,19 @@
 {
   "name": "ember-router-helpers",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Template helpers utilizing the router service.",
   "keywords": [
     "ember-addon"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Robert Jackson <me@rwjblue.com>",
   "directories": {
-    "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rwjblue/ember-router-helpers.git"
+  },
   "scripts": {
     "build": "ember build",
     "start": "ember server",
@@ -46,5 +48,10 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
-  }
+  },
+  "main": "index.js",
+  "bugs": {
+    "url": "https://github.com/rwjblue/ember-router-helpers/issues"
+  },
+  "homepage": "https://github.com/rwjblue/ember-router-helpers#readme"
 }
