@@ -7,6 +7,12 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('parent', { path: '/' }, function() {
+    this.route('child');
+    this.route('sister');
+    this.route('brother');
+  });
+  this.route('dynamic', { path: '/dynamic/:dynamic_id' });
 });
 
 export default Router;
