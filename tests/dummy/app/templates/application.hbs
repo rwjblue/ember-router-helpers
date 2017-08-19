@@ -1,3 +1,82 @@
-<h2 id="title">Welcome to Ember</h2>
+<h2 id="title">Ember-Router-Helpers</h2>
 
-{{outlet}}
+<div>
+  Application QP: {{input value=applicationParam}}
+  
+  <a href={{url-for "asia"}}>Asia</a>
+</div>
+
+<div>
+  {{#with (route-params "asia") as |routeParams|}}
+    <a
+      class={{if routeParams.isActive "active"}}
+      data-test-link-asia
+      href={{routeParams.url}} onclick={{routeParams.transitionTo}}>Asia</a>
+  {{/with}}
+</div>
+
+<div>
+  {{#with (route-params "europe" "Rome" (query-params firstTime=true)) as |routeParams|}}
+    <a
+      class={{if routeParams.isActive "active"}}
+      data-test-link-rome-first-time
+      href={{routeParams.url}} onclick={{routeParams.transitionTo}}>Rome</a>
+  {{/with}}
+
+  {{#with (route-params "europe" "Helsinki" (query-params firstTime=false)) as |routeParams|}}
+    <a
+      class={{if routeParams.isActive "active"}}
+      data-test-link-helsinki
+      href={{routeParams.url}} onclick={{routeParams.transitionTo}}>Helsinki</a>
+  {{/with}}
+
+  {{#with (route-params "europe" "Helsinki" (query-params firstTime=true)) as |routeParams|}}
+    <a
+      class={{if routeParams.isActive "active"}}
+      data-test-link-helsinki-first-time
+      href={{routeParams.url}} onclick={{routeParams.transitionTo}}>Helsinki (F)</a>
+  {{/with}}
+
+  {{#with (route-params "europe" "Prague" (query-params firstTime=true)) as |routeParams|}}
+    <a
+      class={{if routeParams.isActive "active"}}
+      data-test-link-prague-first-time
+      href={{routeParams.url}} onclick={{routeParams.transitionTo}}>Prague</a>
+  {{/with}}
+</div>
+<div>
+  {{#with (route-params "america") as |routeParams|}}
+    <a
+      class={{if routeParams.isActive "active"}}
+      data-test-link-america
+      href={{routeParams.url}} onclick={{routeParams.transitionTo}}>America</a>
+  {{/with}}
+  |
+  {{#with (route-params "america.south") as |routeParams|}}
+    <a
+      class={{if routeParams.isActive "active"}}
+      data-test-link-south-america
+      href={{routeParams.url}} onclick={{routeParams.transitionTo}}>South America</a>
+  {{/with}}
+</div>
+
+<div>
+    <a
+      href={{url-for "europe" "Paris" (query-params firstTime=true)}}
+      class={{if (is-active "europe" "Paris" (query-params firstTime=true)) "active"}}
+      data-test-link-paris-explicit
+      {{action (transition-to "europe" "Paris" (query-params firstTime=true))}}>Paris (F)</a>
+
+    <a
+      href={{url-for "europe" "Paris" (query-params firstTime=false)}}
+      class={{if (is-active "europe" "Paris" (query-params firstTime=false)) "active"}}
+      data-test-link-paris-explicit
+      {{action (transition-to "europe" "Paris" (query-params firstTime=false))}}>Paris</a>
+</div>
+
+<div>
+</div>
+
+<div>
+  {{outlet}}
+</div>

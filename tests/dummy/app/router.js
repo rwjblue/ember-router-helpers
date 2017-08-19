@@ -13,6 +13,12 @@ Router.map(function() {
     this.route('brother');
   });
   this.route('dynamic', { path: '/dynamic/:dynamic_id' });
+
+  this.route('asia');
+  this.route('europe', {path: '/europe/:country'});
+  this.route('america', function() {
+    this.route('south');
+  });
 });
 
 export default Router;
