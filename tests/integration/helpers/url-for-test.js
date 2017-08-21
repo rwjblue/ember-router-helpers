@@ -15,3 +15,9 @@ test('it can generate simple urls', function(assert) {
 
   assert.equal(this._element.textContent, '/child');
 });
+
+test('it can generate urls with query params', function(assert) {
+  this.render(hbs`{{url-for 'parent.child' (query-params foo="bar")}}`);
+
+  assert.equal(this._element.textContent, '/child?foo=bar');
+});

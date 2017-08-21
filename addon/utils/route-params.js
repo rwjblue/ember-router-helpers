@@ -1,11 +1,13 @@
 import Ember from 'ember';
+import handleQueryParams from './handle-query-params';
 
 export default class RouteParams {
   constructor(router, params) {
     this._router = router;
-    this._params = params;
+    this._inputParams = params;
     this._transitionTo = undefined;
     this._replaceWith = undefined;
+    this._processedParams = undefined;
 
     /*
       We need to opt out of Ember eagerly pulling on the getters defined in this class. This is due to
@@ -49,5 +51,13 @@ export default class RouteParams {
     }
 
     return this._replaceWith;
+  }
+
+  get _params() {
+    if (!this._processedParams) {
+      this._processedParams = handleQueryParams(this._inputParams);
+    }
+
+    return this._processedParams;
   }
 }
