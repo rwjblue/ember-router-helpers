@@ -29,6 +29,28 @@ test('route-params yields correct URL value', function(assert) {
   assert.equal(this.$().text().trim(), '/child');
 });
 
+test('route-params yields correct URL value with query-params helper', function(assert) {
+  this.render(hbs`
+    {{#with (route-params 'parent.child' (query-params foo="bar")) as |routeParams|}}
+      {{routeParams.url}}
+    {{/with}}`
+             );
+
+  assert.equal(this.$().text().trim(), '/child?foo=bar');
+});
+
+test('route-params yields correct URL value with query params from context options', function(assert) {
+  this.set('queryParams', { queryParams: { foo: 'bar' }});
+
+  this.render(hbs`
+    {{#with (route-params 'parent.child' queryParams) as |routeParams|}}
+      {{routeParams.url}}
+    {{/with}}`
+             );
+
+  assert.equal(this.$().text().trim(), '/child?foo=bar');
+});
+
 test('route-params only calls urlFor once per render', function(assert) {
   assert.expect(1);
 
