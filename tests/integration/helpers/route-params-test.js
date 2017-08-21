@@ -83,6 +83,36 @@ test('route-params actions invoke transitionTo', async function(assert) {
   await click('button');
 });
 
+test('calls preventDefault on event (e.g. `onclick={{routeParams.transitionTo}}`)', async function(assert) {
+  assert.expect(2);
+
+  let fakeRouter = {
+    transitionTo: () => {
+      assert.ok(true, 'transtionTo invoked');
+    }
+  };
+
+  class MockedRouteParams extends RouteParams {
+    constructor(_router, params) {
+      super(fakeRouter, params);
+    }
+  }
+
+  setRouteParamsClass(MockedRouteParams);
+
+  this.render(hbs`
+    {{#with (route-params 'parent.child') as |routeParams|}}
+      <a href="/" onclick={{routeParams.transitionTo}}></a>
+    {{/with}}`);
+
+  let element = this._element;
+  element.addEventListener('click', (event) => {
+    assert.ok(event.defaultPrevented, 'default should have been prevented on click event');
+  });
+
+  await click('a');
+});
+
 test('route-params only calls replaceWith once per render', function(assert) {
   assert.expect(1);
 
