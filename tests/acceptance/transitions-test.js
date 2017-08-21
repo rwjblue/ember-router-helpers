@@ -29,9 +29,7 @@ test('route params usage', async function(assert) {
 
   assert.ok($helsinki.hasClass('active'), 'heslinki link is active');
   assert.equal(currentURL(), '/europe/Helsinki');
-  assert.equal($('.active').length, 2, 'there are two active links');
-  // ---> if as-active should check for queryParam
-  // assert.equal($('.active').length, 1, 'there are two active links');
+  assert.equal($('.active').length, 1, 'there is one active link');
   assert.notOk($('[query-param-welcome]').length, 'Query Param welcome is not rendered');
   assert.ok($('h2').text().includes('Europe'), 'Europe is in title');
   assert.ok($('h2').text().includes('Helsinki'), 'Helsinki is in title');
@@ -43,9 +41,7 @@ test('route params usage', async function(assert) {
 
   assert.ok($helsinkiFirstTime.hasClass('active'), 'heslinki(f) link is active');
   assert.equal(currentURL(), '/europe/Helsinki?firstTime=true');
-  assert.equal($('.active').length, 2, 'there are two active links');
-  // ---> if as-active should check for queryParam
-  // assert.equal($('.active').length, 1, 'there are two active links');
+  assert.equal($('.active').length, 1, 'there is one active link');
   assert.ok($('[query-param-welcome]').length, 'Query Param welcome is rendered');
   assert.ok($('h2').text().includes('Helsinki'), 'Helsinki is in title');
 
@@ -55,9 +51,7 @@ test('route params usage', async function(assert) {
 
   assert.ok($helsinki.hasClass('active'), 'heslinki link is active');
   assert.equal(currentURL(), '/europe/Helsinki');
-  assert.equal($('.active').length, 2, 'there are two active links');
-  // ---> if as-active should check for queryParam
-  // assert.equal($('.active').length, 1, 'there are two active links');
+  assert.equal($('.active').length, 1, 'there is one active link');
   assert.notOk($('[query-param-welcome]').length, 'Query Param welcome is not rendered (again)');
 
   // --- Different Dynamic Segment + QP --- //
@@ -68,9 +62,7 @@ test('route params usage', async function(assert) {
 
   assert.ok($rome.hasClass('active'), 'heslinki link is active');
   assert.equal(currentURL(), '/europe/Rome?firstTime=true');
-  assert.equal($('.active').length, 1, 'there is just one active link');
-  // ---> if as-active should check for queryParam
-  // assert.equal($('.active').length, 1, 'there are two active links');
+  assert.equal($('.active').length, 1, 'there is one active link');
   assert.ok($('[query-param-welcome]').length, 'Query Param welcome is rendered');
 
   // --- Parent route --- //
@@ -92,6 +84,7 @@ test('route params usage', async function(assert) {
 
   assert.ok($southAmerica.hasClass('active'), 'south america link is active');
   assert.ok($america.hasClass('active'), 'america link is active (still)');
+  assert.equal($('.active').length, 2, 'there are two active links');
   assert.equal(currentURL(), '/america/south');
   assert.ok($('h2').text().includes('America'), 'America is in title');
 });
@@ -108,6 +101,5 @@ test('explicit usage (passing params to is-active and transition)', async functi
   assert.ok($parisExplicit.hasClass('active'), 'parisExplicit link is active');
   assert.equal(currentURL(), '/europe/Paris?firstTime=true');
   assert.ok($('h2').text().includes('Paris'), 'Paris is in title');
-  // explicit usage allows to check for queryParams correctly
   assert.equal($('.active').length, 1, 'there is just one active link');
 });
