@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import restructureQP from '../utils/restructure-query-params';
 
 export default Ember.Helper.extend({
   router: Ember.inject.service(),
@@ -9,7 +10,8 @@ export default Ember.Helper.extend({
         maybeEvent.preventDefault();
       }
 
-      return this.get('router').transitionTo(...params);
+      const paramsWithFixedQP = restructureQP(params);
+      return this.get('router').transitionTo(...paramsWithFixedQP);
     };
   }
 });
