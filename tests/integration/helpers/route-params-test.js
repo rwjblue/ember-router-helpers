@@ -1,10 +1,10 @@
-
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { setRouteParamsClass } from 'ember-router-helpers/helpers/route-params';
 import RouteParams from 'ember-router-helpers/utils/route-params';
 import { click } from 'ember-native-dom-helpers';
+import wait from 'ember-test-helpers/wait';
 
 moduleForComponent('route-params', 'helper:route-params', {
   integration: true,
@@ -175,13 +175,15 @@ test('route-params actions invoke replaceWith', async function(assert) {
   await click('button');
 });
 
-test('route-params yields correct isActive value', function(assert) {
-  assert.expect(2);
+test('route-params yields correct isActive value', async function(assert) {
+  assert.expect(6);
 
+  let currentURL = '/current-url';
   let router = this.owner.lookup('service:router');
+  router.currentURL = currentURL;
   router.isActive = () => {
     assert.ok(true, 'isActive called');
-    return true;
+    return router.get('currentURL') === currentURL;
   }
 
   this.render(hbs`
@@ -191,4 +193,15 @@ test('route-params yields correct isActive value', function(assert) {
   );
 
   assert.ok(this.$('a').hasClass('active'));
+
+  router.set('currentURL', '/different-url');
+
+  await wait();
+
+  assert.notOk(this.$('a').hasClass('active'), 'different url => link is not active anymore');
+  router.set('currentURL', currentURL);
+
+  await wait();
+
+  assert.ok(this.$('a').hasClass('active'), 'same url => link is active again');  
 });
