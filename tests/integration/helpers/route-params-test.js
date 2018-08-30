@@ -1,7 +1,7 @@
 
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { setRouteParamsClass } from 'ember-router-helpers/helpers/route-params';
 import RouteParams from 'ember-router-helpers/utils/route-params';
@@ -171,18 +171,32 @@ module('helper:route-params', function(hooks) {
   });
 
   test('route-params yields correct isActive value', async function(assert) {
-    assert.expect(2);
+    assert.expect(6);
 
+    let currentURL = '/current-url';
     let router = this.owner.lookup('service:router');
     router.isActive = () => {
       assert.ok(true, 'isActive called');
-      return true;
+      return router.get('currentURL') === currentURL;
     }
+
+    router.set('_router.currentURL', currentURL);
 
     await render(hbs`
       {{#with (route-params 'parent.child') as |routeParams|}}
         <a href="{{routeParams.url}}" class="{{if routeParams.isActive 'active' 'inactive'}}">Blah</a>
       {{/with}}`);
+
+    assert.dom('a').hasClass('active');
+
+    router.set('_router.currentURL', '/different-url');
+
+    await settled();
+
+    assert.dom('a').doesNotHaveClass('active');
+    router.set('_router.currentURL', currentURL);
+
+    await settled();
 
     assert.dom('a').hasClass('active');
   });

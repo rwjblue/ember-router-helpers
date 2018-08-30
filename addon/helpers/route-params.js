@@ -12,5 +12,10 @@ export default Helper.extend({
 
   compute(params) {
     return new RouteParams(this.get('router'), params);
+  },
+
+  init() {
+    this._super(...arguments);
+    this.addObserver('router.currentURL', this, 'recompute');
   }
 });

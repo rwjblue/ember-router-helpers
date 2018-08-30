@@ -17,7 +17,7 @@
   "scripts": {
     "build": "ember build",
     "lint:js": "eslint .",
-    "start": "ember serve",
+    "start": "yarn ember serve",
     "test": "yarn ember test",
     "test:all": "ember try:each",
     "ember": "./node_modules/.bin/ember",
