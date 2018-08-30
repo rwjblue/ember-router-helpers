@@ -17,7 +17,9 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember try:each"
+    "test": "ember try:each",
+    "ember": "./node_modules/.bin/ember",
+    "ember:update": "./node_modules/.bin/ember-cli-update"
   },
   "dependencies": {
     "ember-cli-babel": "^6.0.0",
@@ -25,9 +27,9 @@
     "ember-router-service-polyfill": "^1.0.1"
   },
   "devDependencies": {
-    "broccoli-asset-rev": "^2.4.5",
+    "broccoli-asset-rev": "^3.0.0",
     "ember-ajax": "^3.0.0",
-    "ember-cli": "~2.14.0-beta.2",
+    "ember-cli": "~2.14.0",
     "ember-cli-dependency-checker": "^2.0.0",
     "ember-cli-eslint": "^4.0.0",
     "ember-cli-htmlbars-inline-precompile": "^0.4.3",
@@ -36,16 +38,17 @@
     "ember-cli-shims": "^1.2.0-beta.2",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^1.2.0",
+    "ember-cli-update": "^0.23.0",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
     "ember-native-dom-helpers": "^0.5.0",
     "ember-resolver": "^4.0.0",
-    "ember-source": "~2.14.0-beta.1",
+    "ember-source": "~2.14.0",
     "loader.js": "^4.2.3"
   },
   "engines": {
-    "node": ">= 4"
+    "node": "^4.5 || 6.* || 7.* || 8.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
