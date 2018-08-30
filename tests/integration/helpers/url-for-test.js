@@ -1,23 +1,24 @@
-import Ember from 'ember';
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('url-for', 'helper:url-for', {
-  integration: true,
+module('helper:url-for', function(hooks) {
+  setupRenderingTest(hooks);
 
-  beforeEach() {
-    Ember.getOwner(this).lookup('router:main').setupRouter();
-  }
-});
+  hooks.beforeEach(function() {
+    this.owner.lookup('router:main').setupRouter();
+  });
 
-test('it can generate simple urls', function(assert) {
-  this.render(hbs`{{url-for 'parent.child'}}`);
+  test('it can generate simple urls', async function(assert) {
+    await render(hbs`{{url-for 'parent.child'}}`);
 
-  assert.equal(this._element.textContent, '/child');
-});
+    assert.dom(this.element).hasText('/child');
+  });
 
-test('it can generate urls with query params', function(assert) {
-  this.render(hbs`{{url-for 'parent.child' (query-params foo="bar")}}`);
+  test('it can generate urls with query params', async function(assert) {
+    await render(hbs`{{url-for 'parent.child' (query-params foo="bar")}}`);
 
-  assert.equal(this._element.textContent, '/child?foo=bar');
+    assert.dom(this.element).hasText('/child?foo=bar');
+  });
 });
