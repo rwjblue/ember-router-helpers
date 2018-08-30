@@ -1,6 +1,5 @@
 # ember-router-helpers
 
-[Short description of the addon.]
 
 Installation
 ------------------------------------------------------------------------------
@@ -8,6 +7,36 @@ Installation
 * `git clone <repository-url>` this repository
 * `cd ember-router-helpers`
 * `npm install`
+
+## Usage
+
+* `route-params`
+
+```hbs
+{{#with (route-params 'parent.child') as |routeParams|}}
+  <a href="{{routeParams.url}}" class="{{if routeParams.isActive 'active' 'inactive'}}">Blah</a>
+{{/with}}
+```
+
+* `transition-to`
+
+```hbs
+<button onclick={{transition-to 'parent.child'}}></button>
+```
+
+* `is-active`
+
+```hbs
+{{is-active '/parent/child'}}
+```
+
+* `url-for`
+```hbs
+{{url-for 'parent.child'}}
+```
+
+
+
 
 ### Linting
 
