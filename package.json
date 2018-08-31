@@ -1,6 +1,6 @@
 {
   "name": "ember-router-helpers",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Template helpers utilizing the router service.",
   "keywords": [
     "ember-addon"
