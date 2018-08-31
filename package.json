@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "ember-cli-babel": "^6.6.0",
-    "ember-cli-htmlbars": "^2.0.2",
+    "ember-cli-htmlbars": "^3.0.0",
     "ember-router-service-polyfill": "^1.0.1"
   },
   "devDependencies": {
