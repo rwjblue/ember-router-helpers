@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Helper from '@ember/component/helper';
 import _RouteParams from '../utils/route-params';
 
 let RouteParams = _RouteParams;
@@ -6,8 +7,13 @@ export function setRouteParamsClass(klass) {
   RouteParams = klass;
 }
 
-export default Ember.Helper.extend({
-  router: Ember.inject.service(),
+export default Helper.extend({
+  router: service(),
+
+  init() {
+    this._super(...arguments);
+    this.addObserver('router.currentURL', this, 'recompute');
+  },
 
   compute(params) {
     return new RouteParams(this.get('router'), params);

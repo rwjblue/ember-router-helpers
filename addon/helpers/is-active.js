@@ -1,8 +1,14 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Helper from '@ember/component/helper';
 import handleQueryParams from '../utils/handle-query-params';
 
-export default Ember.Helper.extend({
-  router: Ember.inject.service(),
+export default Helper.extend({
+  router: service(),
+
+  init() {
+    this._super(...arguments);
+    this.addObserver('router.currentURL', this, 'recompute');
+  },
 
   compute(_params) {
     let params = handleQueryParams(_params);

@@ -1,6 +1,42 @@
 # ember-router-helpers
 
-This README outlines the details of collaborating on this Ember addon.
+## Installation
+
+```
+ember install ember-router-helpers
+```
+
+## Usage
+
+* `route-params`
+
+```hbs
+{{#with (route-params 'parent.child') as |routeParams|}}
+  <a href="{{routeParams.url}}" class="{{if routeParams.isActive 'active' 'inactive'}}">Blah</a>
+{{/with}}
+```
+
+* `transition-to`
+
+```hbs
+<button onclick={{transition-to 'parent.child'}}></button>
+```
+
+* `is-active`
+
+```hbs
+{{is-active '/parent/child'}}
+```
+
+* `url-for`
+```hbs
+{{url-for 'parent.child'}}
+```
+
+---------------------------------------
+
+
+This rest of this README outlines the details of collaborating on this Ember addon.
 
 ## Installation
 
