@@ -19,9 +19,7 @@
     "lint:js": "eslint .",
     "start": "yarn ember serve",
     "test": "yarn ember test",
-    "test:all": "ember try:each",
-    "ember": "./node_modules/.bin/ember",
-    "ember:update": "./node_modules/.bin/ember-cli-update"
+    "test:all": "ember try:each"
   },
   "dependencies": {
     "ember-cli-babel": "^6.6.0",
@@ -40,7 +38,6 @@
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.0",
-    "ember-cli-update": "^0.23.0",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.1.0",

@@ -10,12 +10,12 @@ export function setRouteParamsClass(klass) {
 export default Helper.extend({
   router: service(),
 
-  compute(params) {
-    return new RouteParams(this.get('router'), params);
-  },
-
   init() {
     this._super(...arguments);
     this.addObserver('router.currentURL', this, 'recompute');
+  },
+
+  compute(params) {
+    return new RouteParams(this.get('router'), params);
   }
 });
