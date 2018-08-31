@@ -1,5 +1,7 @@
 # ember-router-helpers
 
+[![Build Status](https://travis-ci.org/rwjblue/ember-router-helpers.svg?branch=master)](https://travis-ci.org/rwjblue/ember-router-helpers)
+
 ## Installation
 
 ```
