@@ -13,5 +13,10 @@ export default Helper.extend({
   compute(_params) {
     let params = handleQueryParams(_params);
     return this.get('router').isActive(...params);
+  },
+  
+  init() {
+    this._super(...arguments);
+    this.addObserver('router.currentURL', this, 'recompute');
   }
 });
