@@ -1,0 +1,8 @@
+<a
+  {{action (transition @to models=@models replace=@replace)}}
+  ...attributes
+  class="{{if (is-active @to models=@models) 'active'}}">
+
+  {{yield}}
+
+</a>

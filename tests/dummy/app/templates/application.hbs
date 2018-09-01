@@ -1,3 +1,15 @@
 <h2 id="title">Welcome to Ember</h2>
 
+<Link @to='parent.child' data-test-parent-child-link>
+  Parent/Child
+</Link>
+
+<Link @to='dynamic' @models={{1}} data-test-dynamic-with-id>
+  Link to dynamic route with an id passed
+</Link>
+
+<Link @to='dynamic' @models={{someObject}} data-test-dynamic-with-object>
+  Link to dynamic route with an object passed
+</Link>
+
 {{outlet}}
