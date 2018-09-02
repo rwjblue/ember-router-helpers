@@ -1,6 +1,5 @@
-<a
-  {{action (transition @to models=@models replace=@replace)}}
-  ...attributes
+<a ...attributes
+  onclick={{action (transition @to models=@models replace=@replace)}}
   class="{{if (is-active @to models=@models) 'active'}}">
 
   {{yield}}

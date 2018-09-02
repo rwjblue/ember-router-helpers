@@ -1,3 +1,7 @@
 import Component from '@ember/component';
 
-export default class Link extends Component {  }
+import layout from '../templates/components/link';
+
+export default class Link extends Component.extend({ layout, tagName: '' }) {  
+
+}

@@ -2,10 +2,10 @@ import { inject as service } from '@ember/service';
 import Helper from '@ember/component/helper';
 import handleQueryParams from '../utils/handle-query-params';
 
-export function transitionTo(_params, router) {
+export function replaceWith(_params, router) {
   let params = handleQueryParams(_params);
 
-  return router.transitionTo(...params);
+  return router.replaceWith(...params);
 }
 
 export default Helper.extend({
@@ -17,7 +17,7 @@ export default Helper.extend({
         maybeEvent.preventDefault();
       }
 
-      return transitionTo(_params, this.get('router'));
+      return replaceWith(_params, this.get('router'));
     };
   }
 });

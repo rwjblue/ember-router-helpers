@@ -9,6 +9,6 @@ module('Acceptance | navigation', function(hooks) {
     await visit('/');
     await click('[data-test-parent-child-link]');
 
-    assert.equal(currentURL(), '/parent/child');
+    assert.equal(currentURL(), '/child');
   });
 });
