@@ -27,7 +27,7 @@ ember install ember-router-helpers
 * `is-active`
 
 ```hbs
-{{is-active '/parent/child'}}
+{{is-active 'parent.child'}}
 ```
 
 * `url-for`
