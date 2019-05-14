@@ -1,11 +1,10 @@
 
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render, settled } from '@ember/test-helpers';
+import { click, render, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { setRouteParamsClass } from 'ember-router-helpers/helpers/route-params';
 import RouteParams from 'ember-router-helpers/utils/route-params';
-import { click } from 'ember-native-dom-helpers';
 
 module('helper:route-params', function(hooks) {
   setupRenderingTest(hooks);
