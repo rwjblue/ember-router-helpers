@@ -13,26 +13,26 @@ ember install ember-router-helpers
 * `route-params`
 
 ```hbs
-{{#with (route-params 'parent.child') as |routeParams|}}
-  <a href="{{routeParams.url}}" class="{{if routeParams.isActive 'active' 'inactive'}}">Blah</a>
+{{#with (route-params "parent.child") as |routeParams|}}
+  <a href={{routeParams.url}} class={{if routeParams.isActive "active" "inactive"}}>Blah</a>
 {{/with}}
 ```
 
 * `transition-to`
 
 ```hbs
-<button onclick={{transition-to 'parent.child'}}></button>
+<button onclick={{transition-to "parent.child"}}></button>
 ```
 
 * `is-active`
 
 ```hbs
-{{is-active 'parent.child'}}
+{{is-active "parent.child"}}
 ```
 
 * `url-for`
 ```hbs
-{{url-for 'parent.child'}}
+{{url-for "parent.child"}}
 ```
 
 ---------------------------------------
