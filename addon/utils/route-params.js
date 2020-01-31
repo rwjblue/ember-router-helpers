@@ -16,10 +16,12 @@ export default class RouteParams {
       in a single render.
     */
     let m = Ember.meta(this);
-    m.writeWatching('isActive', 1);
-    m.writeWatching('url', 1);
-    m.writeWatching('transitionTo', 1);
-    m.writeWatching('replaceWith', 1);
+    if(typeof m.writeWatching === 'function') {
+      m.writeWatching('isActive', 1);
+      m.writeWatching('url', 1);
+      m.writeWatching('transitionTo', 1);
+      m.writeWatching('replaceWith', 1);
+    }
   }
 
   get isActive() {
