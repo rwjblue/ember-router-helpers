@@ -29,21 +29,18 @@ module('helper:is-active', function(hooks) {
     this.set('targetRoute', 'bar');
     await render(hbs`{{is-active targetRoute}}`);
 
-    assert.dom('*').hasText(
-      'false',
-      'is-active is not true when curren route is different from target route'
-    );
+    assert.strictEqual(this.element.textContent, 'false', 'is-active is not true when curren route is different from target route');
 
     router.set('currentURL', '/bar');
 
     await settled();
 
-    assert.dom('*').hasText('true', 'is-active is true now when URL has changed');
+    assert.strictEqual(this.element.textContent, 'true', 'is-active is true now when URL has changed');
 
     router.set('currentURL', '/foo');
 
     await settled();
 
-    assert.dom('*').hasText('false', 'is-active is false when URL has changed');
+    assert.strictEqual(this.element.textContent, 'false', 'is-active is false when curren route has changed');
   });
 });
