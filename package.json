@@ -5,12 +5,17 @@
   "keywords": [
     "ember-addon"
   ],
+  "homepage": "https://github.com/rwjblue/ember-router-helpers#readme",
+  "bugs": {
+    "url": "https://github.com/rwjblue/ember-router-helpers/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rwjblue/ember-router-helpers.git"
   },
   "license": "MIT",
   "author": "Robert Jackson <me@rwjblue.com>",
+  "main": "index.js",
   "directories": {
     "test": "tests"
   },
@@ -55,10 +60,15 @@
     "eslint-plugin-node": "^11.1.0",
     "loader.js": "^4.7.0",
     "npm-run-all": "^4.1.5",
-    "qunit-dom": "^1.2.0"
+    "qunit-dom": "^1.2.0",
+    "release-it": "^13.6.0",
+    "release-it-lerna-changelog": "^2.3.0"
   },
   "engines": {
     "node": "10.* || >= 12"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "ember": {
     "edition": "octane"
@@ -66,9 +76,19 @@
   "ember-addon": {
     "configPath": "tests/dummy/config"
   },
-  "main": "index.js",
-  "bugs": {
-    "url": "https://github.com/rwjblue/ember-router-helpers/issues"
-  },
-  "homepage": "https://github.com/rwjblue/ember-router-helpers#readme"
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
+  }
 }
