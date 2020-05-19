@@ -1,3 +1,18 @@
+## v0.4.0 (2020-05-19)
+
+#### :boom: Breaking Change
+* [#262](https://github.com/rwjblue/ember-router-helpers/pull/262) Refactor helpers to assume auto-tracking. ([@rwjblue](https://github.com/rwjblue))
+
+#### :bug: Bug Fix
+* [#263](https://github.com/rwjblue/ember-router-helpers/pull/263) Ensure `is-active` updates properly from <-> to loading states. ([@rwjblue](https://github.com/rwjblue))
+
+#### :house: Internal
+* [#261](https://github.com/rwjblue/ember-router-helpers/pull/261) Migrate to GitHub Actions. ([@rwjblue](https://github.com/rwjblue))
+
+#### Committers: 1
+- Robert Jackson ([@rwjblue](https://github.com/rwjblue))
+
+
 ## v0.3.0 (2020-05-19)
 
 #### :boom: Breaking Change
