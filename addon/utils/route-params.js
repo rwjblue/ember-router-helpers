@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import handleQueryParams from './handle-query-params';
 
 export default class RouteParams {
@@ -8,23 +7,12 @@ export default class RouteParams {
     this._transitionTo = undefined;
     this._replaceWith = undefined;
     this._processedParams = undefined;
-
-    /*
-      We need to opt out of Ember eagerly pulling on the getters defined in this class. This is due to
-      watchKeys (https://github.com/emberjs/ember.js/blob/d8880eed573a56c8a9172ef9d2bebcfe8fd25582/packages/ember-metal/lib/watch_key.js#L24)
-      getting a property to check for reference counting. Without this, our intentionally lazy getter is evaluated twice
-      in a single render.
-    */
-    let m = Ember.meta(this);
-    if(typeof m.writeWatching === 'function') {
-      m.writeWatching('isActive', 1);
-      m.writeWatching('url', 1);
-      m.writeWatching('transitionTo', 1);
-      m.writeWatching('replaceWith', 1);
-    }
   }
 
   get isActive() {
+    // ensure router.currentURL is auto-tracked
+    this._router.currentURL;
+
     return this._router.isActive(...this._params);
   }
 
