@@ -1,4 +1,5 @@
 import { inject as service } from '@ember/service';
+// eslint-disable-next-line ember/no-observers
 import { observer } from '@ember/object';
 import { join } from '@ember/runloop';
 import Helper from '@ember/component/helper';
@@ -9,7 +10,8 @@ export default Helper.extend({
 
   compute(_params) {
     let params = handleQueryParams(_params);
-    return this.get('router').isActive(...params);
+
+    return this.router.isActive(...params);
   },
 
   // eslint-disable-next-line ember/no-observers

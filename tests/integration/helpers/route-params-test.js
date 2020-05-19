@@ -23,7 +23,7 @@ module('helper:route-params', function(hooks) {
         {{routeParams.url}}
       {{/with}}`);
 
-    assert.dom('*').hasText('/child');
+    assert.strictEqual(this.element.textContent.trim(), '/child');
   });
 
   test('route-params yields correct URL value with query-params helper', async function(assert) {
@@ -32,7 +32,7 @@ module('helper:route-params', function(hooks) {
         {{routeParams.url}}
       {{/with}}`);
 
-    assert.dom('*').hasText('/child?foo=bar');
+    assert.strictEqual(this.element.textContent.trim(), '/child?foo=bar');
   });
 
   test('route-params yields correct URL value with query params from context options', async function(assert) {
@@ -43,7 +43,7 @@ module('helper:route-params', function(hooks) {
         {{routeParams.url}}
       {{/with}}`);
 
-    assert.dom('*').hasText('/child?foo=bar');
+    assert.strictEqual(this.element.textContent.trim(), '/child?foo=bar');
   });
 
   test('route-params only calls urlFor once per render', async function(assert) {

@@ -7,6 +7,6 @@ export default Helper.extend({
 
   compute(_params) {
     let params = handleQueryParams(_params);
-    return this.get('router').urlFor(...params);
+    return this.router.urlFor(...params);
   }
 });
