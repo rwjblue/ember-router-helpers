@@ -12,7 +12,7 @@ export default Helper.extend({
       }
 
       let params = handleQueryParams(_params);
-      return this.get('router').transitionTo(...params);
+      return this.router.transitionTo(...params);
     };
   }
 });

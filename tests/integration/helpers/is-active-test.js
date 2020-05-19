@@ -7,11 +7,11 @@ import hbs from 'htmlbars-inline-precompile';
 
 const RouterServiceMock = Service.extend({
   currentRouteName: computed('currentURL', function() {
-    return this.get('currentURL').substring(1);
+    return this.currentURL.substring(1);
   }),
 
   isActive(routeName) {
-    return this.get('currentRouteName') === routeName;
+    return this.currentRouteName === routeName;
   }
 });
 

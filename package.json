@@ -16,7 +16,7 @@
   },
   "scripts": {
     "build": "ember build --environment=production",
-    "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
+    "lint": "npm-run-all --continue-on-error lint:*",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "yarn ember serve",

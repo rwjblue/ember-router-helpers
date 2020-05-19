@@ -1,4 +1,5 @@
 import { inject as service } from '@ember/service';
+// eslint-disable-next-line ember/no-observers
 import { observer } from '@ember/object';
 import { join } from '@ember/runloop';
 import Helper from '@ember/component/helper';
@@ -13,7 +14,7 @@ export default Helper.extend({
   router: service(),
 
   compute(params) {
-    return new RouteParams(this.get('router'), params);
+    return new RouteParams(this.router, params);
   },
 
   // eslint-disable-next-line ember/no-observers

@@ -5,6 +5,6 @@ export default Helper.extend({
   router: service('router'),
 
   compute() {
-    return this.get('router.rootURL');
+    return this.router.rootURL;
   }
 });
