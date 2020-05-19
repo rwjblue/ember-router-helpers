@@ -1,6 +1,6 @@
 # ember-router-helpers
 
-[![Build Status](https://travis-ci.org/rwjblue/ember-router-helpers.svg?branch=master)](https://travis-ci.org/rwjblue/ember-router-helpers)
+[![CI Build](https://github.com/rwjblue/ember-router-helpers/workflows/CI/badge.svg)](https://github.com/rwjblue/ember-router-helpers/actions?query=workflow%3A%22CI%22)
 
 Compatibility
 ------------------------------------------------------------------------------
