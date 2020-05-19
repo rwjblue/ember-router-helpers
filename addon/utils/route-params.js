@@ -1,4 +1,5 @@
 import handleQueryParams from './handle-query-params';
+import trackActiveRoute from './track-active-route';
 
 export default class RouteParams {
   constructor(router, params) {
@@ -10,8 +11,7 @@ export default class RouteParams {
   }
 
   get isActive() {
-    // ensure router.currentURL is auto-tracked
-    this._router.currentURL;
+    trackActiveRoute(this._router);
 
     return this._router.isActive(...this._params);
   }

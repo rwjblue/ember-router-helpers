@@ -40,7 +40,8 @@ module.exports = {
         'addon/**',
         'addon-test-support/**',
         'app/**',
-        'tests/dummy/app/**'
+        'tests/dummy/app/**',
+        'tests/helpers/**'
       ],
       parserOptions: {
         sourceType: 'script'
