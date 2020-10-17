@@ -37,7 +37,8 @@
     "prepare": "npm-run-all --aggregate-output --continue-on-error --parallel copyDoc build"
   },
   "dependencies": {
-    "@embroider/addon-shim": "^1.6.0"
+    "@embroider/addon-shim": "^1.6.0",
+    "@embroider/macros": "^1.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.10",
@@ -66,6 +67,7 @@
     "type": "addon",
     "version": 2,
     "app-js": {
+      "./event_dispatcher.js": "./dist/_app_/event_dispatcher.js",
       "./helpers/is-active.js": "./dist/_app_/helpers/is-active.js",
       "./helpers/replace-with.js": "./dist/_app_/helpers/replace-with.js",
       "./helpers/root-url.js": "./dist/_app_/helpers/root-url.js",
