@@ -34,6 +34,12 @@ Usage
 <button onclick={{transition-to "parent.child"}}></button>
 ```
 
+* `replace-with`
+
+```hbs
+<button onclick={{replace-with "parent.child"}}></button>
+```
+
 * `is-active`
 
 ```hbs
