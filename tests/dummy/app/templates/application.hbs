@@ -1,3 +1,48 @@
 <h2 id="title">Welcome to Ember</h2>
 
+<a href={{url-for "parent.child"}} id="anchor">
+  parent.child (anchor)
+</a>
+
+<LinkTo @route="parent.child" @id="LinkTo">
+  parent.child (LinkTo)
+</LinkTo>
+
+<a href="/download" id="download" download>
+  download
+</a>
+
+<a href="/unknown" id="unknown">
+  unknown
+</a>
+
+<a href={{url-for "parent.child"}} id="blank" target="_blank" rel="noopener noreferrer">
+  parent.child (_blank)
+</a>
+
+{{!-- template-lint-disable no-action --}}
+<a href="/action" id="action" {{action "foo" preventDefault=false}} rel="noopener noreferrer">
+  data-ember-action
+</a>
+
+<a href="https://emberjs.com" id="absolute" rel="noopener noreferrer">
+  absolute
+</a>
+
+<a href={{url-for "parent.child"}} id="shiftKey">
+  parent.child (shiftKey)
+</a>
+
+<a href={{url-for "parent.child"}} id="metaKey">
+  parent.child (metaKey)
+</a>
+
+<a href={{url-for "parent.child"}} id="altKey">
+  parent.child (altKey)
+</a>
+
+<a href={{url-for "parent.child"}} id="ctrlKey">
+  parent.child (ctrlKey)
+</a>
+
 {{outlet}}
