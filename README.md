@@ -31,7 +31,7 @@ Usage
 * `transition-to`
 
 ```hbs
-<button onclick={{transition-to "parent.child"}}></button>
+<button {{on "click" (transition-to "parent.child")}}></button>
 ```
 
 * `is-active`
