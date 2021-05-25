@@ -35,31 +35,28 @@ module('helper:is-active', function () {
       this.set('targetRoute', 'bar');
       await render(hbs`{{is-active this.targetRoute}}`);
 
-      assert.strictEqual(
-        this.element.textContent,
-        'false',
-        'is-active is not true when curren route is different from target route'
-      );
+      assert
+        .dom(this.element)
+        .hasText(
+          'false',
+          'is-active is not true when curren route is different from target route'
+        );
 
       router.set('currentURL', '/bar');
 
       await settled();
 
-      assert.strictEqual(
-        this.element.textContent,
-        'true',
-        'is-active is true now when URL has changed'
-      );
+      assert
+        .dom(this.element)
+        .hasText('true', 'is-active is true now when URL has changed');
 
       router.set('currentURL', '/foo');
 
       await settled();
 
-      assert.strictEqual(
-        this.element.textContent,
-        'false',
-        'is-active is false when curren route has changed'
-      );
+      assert
+        .dom(this.element)
+        .hasText('false', 'is-active is false when curren route has changed');
     });
   });
 
@@ -83,27 +80,24 @@ module('helper:is-active', function () {
     test('it updates when currentURL changes', async function (assert) {
       await visit('/');
 
-      assert.strictEqual(
-        this.element.textContent,
-        'false',
-        'is-active is not true when curren route is different from target route'
-      );
+      assert
+        .dom(this.element)
+        .hasText(
+          'false',
+          'is-active is not true when curren route is different from target route'
+        );
 
       await visit('/foo');
 
-      assert.strictEqual(
-        this.element.textContent,
-        'true',
-        'is-active is true now when URL has changed'
-      );
+      assert
+        .dom(this.element)
+        .hasText('true', 'is-active is true now when URL has changed');
 
       await visit('/');
 
-      assert.strictEqual(
-        this.element.textContent,
-        'false',
-        'is-active is false when curren route has changed'
-      );
+      assert
+        .dom(this.element)
+        .hasText('false', 'is-active is false when curren route has changed');
     });
 
     test('it renders and rerenders when the URL changes into and out of loading substate', async function (assert) {
@@ -124,31 +118,31 @@ module('helper:is-active', function () {
 
       await visit('/');
 
-      assert.strictEqual(
-        this.element.textContent,
-        'false',
-        'precond - is-active is not true when on index route'
-      );
+      assert
+        .dom(this.element)
+        .hasText(
+          'false',
+          'precond - is-active is not true when on index route'
+        );
 
       let visitPromise = visit('/foo');
 
       await waitFor('.loading-spinner');
 
-      assert.strictEqual(
-        this.element.textContent,
-        'false',
-        'is-active is not true when on the loading substate'
-      );
+      assert
+        .dom(this.element)
+        .hasText('false', 'is-active is not true when on the loading substate');
 
       slowModelDeferred.resolve();
 
       await visitPromise;
 
-      assert.strictEqual(
-        this.element.textContent,
-        'true',
-        'is-active is true now that model hook has fully resolved'
-      );
+      assert
+        .dom(this.element)
+        .hasText(
+          'true',
+          'is-active is true now that model hook has fully resolved'
+        );
     });
   });
 });

@@ -13,9 +13,6 @@ module('Integration | Helper | root-url', function (hooks) {
 
   test('can be used to prefix any href', async function (assert) {
     await render(hbs`<a href="{{root-url}}profile">Profile</a>`);
-    assert.equal(
-      this.element.querySelector('a').getAttribute('href'),
-      '/profile'
-    );
+    assert.dom('a', this.element).hasAttribute('href', '/profile');
   });
 });
