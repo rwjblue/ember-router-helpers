@@ -7,7 +7,10 @@ export default class ReplaceWithHelper extends Helper {
 
   compute(_params) {
     return (maybeEvent) => {
-      if (maybeEvent !== undefined && typeof maybeEvent.preventDefault === 'function') {
+      if (
+        maybeEvent !== undefined &&
+        typeof maybeEvent.preventDefault === 'function'
+      ) {
         maybeEvent.preventDefault();
       }
 

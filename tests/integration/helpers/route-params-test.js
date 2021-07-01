@@ -1,4 +1,3 @@
-
 import { module, test } from 'qunit';
 import { setupRenderingTest, setupApplicationTest } from 'ember-qunit';
 import { click, render, visit, waitFor, settled } from '@ember/test-helpers';
@@ -9,55 +8,55 @@ import { defer } from '../../helpers';
 import EmberRouter from '@ember/routing/router';
 import Route from '@ember/routing/route';
 
-module('helper:route-params', function() {
-  module('rendering', function(hooks) {
+module('helper:route-params', function () {
+  module('rendering', function (hooks) {
     setupRenderingTest(hooks);
 
-    hooks.beforeEach(function() {
-      this.owner.lookup('router:main').setupRouter();
+    hooks.beforeEach(function () {
+      this.owner.setupRouter();
     });
 
-    hooks.afterEach(function() {
+    hooks.afterEach(function () {
       setRouteParamsClass(RouteParams);
     });
 
-    test('route-params yields correct URL value', async function(assert) {
+    test('route-params yields correct URL value', async function (assert) {
       await render(hbs`
       {{#with (route-params 'parent.child') as |routeParams|}}
         {{routeParams.url}}
       {{/with}}`);
 
-      assert.strictEqual(this.element.textContent.trim(), '/child');
+      assert.dom(this.element).hasText('/child');
     });
 
-    test('route-params yields correct URL value with query-params helper', async function(assert) {
+    test('route-params yields correct URL value with query-params helper', async function (assert) {
       await render(hbs`
       {{#with (route-params 'parent.child' (query-params foo="bar")) as |routeParams|}}
         {{routeParams.url}}
       {{/with}}`);
 
-      assert.strictEqual(this.element.textContent.trim(), '/child?foo=bar');
+      assert.dom(this.element).hasText('/child?foo=bar');
     });
 
-    test('route-params yields correct URL value with query params from context options', async function(assert) {
-      this.set('queryParams', { queryParams: { foo: 'bar' }});
+    test('route-params yields correct URL value with query params from context options', async function (assert) {
+      this.set('queryParams', { queryParams: { foo: 'bar' } });
 
       await render(hbs`
-      {{#with (route-params 'parent.child' queryParams) as |routeParams|}}
+      {{#with (route-params 'parent.child' this.queryParams) as |routeParams|}}
         {{routeParams.url}}
       {{/with}}`);
 
-      assert.strictEqual(this.element.textContent.trim(), '/child?foo=bar');
+      assert.dom(this.element).hasText('/child?foo=bar');
     });
 
-    test('route-params only calls urlFor once per render', async function(assert) {
+    test('route-params only calls urlFor once per render', async function (assert) {
       assert.expect(1);
 
       let router = this.owner.lookup('service:router');
       router.urlFor = () => {
         assert.ok(true, 'urlFor called');
         return '/foo';
-      }
+      };
 
       await render(hbs`
       {{#with (route-params 'parent.child') as |routeParams|}}
@@ -65,7 +64,7 @@ module('helper:route-params', function() {
       {{/with}}`);
     });
 
-    test('route-params only calls transitionTo once per render', async function(assert) {
+    test('route-params only calls transitionTo once per render', async function (assert) {
       assert.expect(1);
 
       class MockedRouteParams extends RouteParams {
@@ -83,7 +82,7 @@ module('helper:route-params', function() {
       {{/with}}`);
     });
 
-    test('route-params actions invoke transitionTo', async function(assert) {
+    test('route-params actions invoke transitionTo', async function (assert) {
       assert.expect(1);
 
       class MockedRouteParams extends RouteParams {
@@ -104,13 +103,13 @@ module('helper:route-params', function() {
       await click('button');
     });
 
-    test('calls preventDefault on event (e.g. `onclick={{routeParams.transitionTo}}`)', async function(assert) {
+    test('calls preventDefault on event (e.g. `onclick={{routeParams.transitionTo}}`)', async function (assert) {
       assert.expect(2);
 
       let fakeRouter = {
         transitionTo: () => {
           assert.ok(true, 'transtionTo invoked');
-        }
+        },
       };
 
       class MockedRouteParams extends RouteParams {
@@ -128,13 +127,16 @@ module('helper:route-params', function() {
 
       let element = this.element;
       element.addEventListener('click', (event) => {
-        assert.ok(event.defaultPrevented, 'default should have been prevented on click event');
+        assert.ok(
+          event.defaultPrevented,
+          'default should have been prevented on click event'
+        );
       });
 
       await click('a');
     });
 
-    test('route-params only calls replaceWith once per render', async function(assert) {
+    test('route-params only calls replaceWith once per render', async function (assert) {
       assert.expect(1);
 
       class MockedRouteParams extends RouteParams {
@@ -152,7 +154,7 @@ module('helper:route-params', function() {
       {{/with}}`);
     });
 
-    test('route-params actions invoke replaceWith', async function(assert) {
+    test('route-params actions invoke replaceWith', async function (assert) {
       assert.expect(1);
 
       class MockedRouteParams extends RouteParams {
@@ -173,7 +175,7 @@ module('helper:route-params', function() {
       await click('button');
     });
 
-    test('route-params yields correct isActive value', async function(assert) {
+    test('route-params yields correct isActive value', async function (assert) {
       assert.expect(6);
 
       let currentURL = '/current-url';
@@ -181,7 +183,7 @@ module('helper:route-params', function() {
       router.isActive = () => {
         assert.ok(true, 'isActive called');
         return router.get('currentURL') === currentURL;
-      }
+      };
 
       router.set('_router.currentURL', currentURL);
 
@@ -205,12 +207,12 @@ module('helper:route-params', function() {
     });
   });
 
-  module('routing', function(hooks) {
+  module('routing', function (hooks) {
     setupApplicationTest(hooks);
 
-    hooks.beforeEach(function() {
+    hooks.beforeEach(function () {
       class Router extends EmberRouter {}
-      Router.map(function() {
+      Router.map(function () {
         this.route('foo');
         this.route('bar');
       });
@@ -227,7 +229,7 @@ module('helper:route-params', function() {
       );
     });
 
-    test('isActive updates when currentURL changes', async function(assert) {
+    test('isActive updates when currentURL changes', async function (assert) {
       await visit('/');
 
       assert.dom('a').hasClass('inactive');
@@ -241,15 +243,21 @@ module('helper:route-params', function() {
       assert.dom('a').hasClass('inactive');
     });
 
-    test('it renders and rerenders when the URL changes into and out of loading substate', async function(assert) {
+    test('it renders and rerenders when the URL changes into and out of loading substate', async function (assert) {
       let slowModelDeferred = defer();
 
-      this.owner.register('route:foo', class extends Route {
-        model() {
-          return slowModelDeferred.promise;
+      this.owner.register(
+        'route:foo',
+        class extends Route {
+          model() {
+            return slowModelDeferred.promise;
+          }
         }
-      });
-      this.owner.register('template:foo-loading', hbs`<div class="loading-spinner"></div>`);
+      );
+      this.owner.register(
+        'template:foo-loading',
+        hbs`<div class="loading-spinner"></div>`
+      );
 
       await visit('/');
 
