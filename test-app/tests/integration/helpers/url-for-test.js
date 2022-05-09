@@ -7,6 +7,7 @@ module('helper:url-for', function(hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function() {
+    // eslint-disable-next-line ember/no-private-routing-service
     this.owner.lookup('router:main').setupRouter();
   });
 
