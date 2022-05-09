@@ -1,4 +1,3 @@
-import { computed } from '@ember/object';
 import Service from '@ember/service';
 import { module, test } from 'qunit';
 import { setupRenderingTest, setupApplicationTest } from 'ember-qunit';
@@ -6,17 +5,21 @@ import { render, settled, visit, waitFor } from '@ember/test-helpers';
 import EmberRouter from '@ember/routing/router';
 import Route from '@ember/routing/route';
 import hbs from 'htmlbars-inline-precompile';
+import { tracked } from '@glimmer/tracking';
 import { defer } from '../../helpers';
 
-const RouterServiceMock = Service.extend({
-  currentRouteName: computed('currentURL', function() {
+class RouterServiceMock extends Service {
+  @tracked
+  currentURL;
+
+  get currentRouteName() {
     return this.currentURL.substring(1);
-  }),
+  }
 
   isActive(routeName) {
     return this.currentRouteName === routeName;
   }
-});
+}
 
 module('helper:is-active', function() {
   module('rendering', function(hooks) {

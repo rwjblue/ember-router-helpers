@@ -10,11 +10,14 @@ module('replace-with', function(hooks) {
   hooks.beforeEach(function() {
     let invocationArguments = this.invocationArguments = [];
 
-    this.owner.register('service:router', Service.extend({
-      replaceWith() {
-        invocationArguments.push([...arguments]);
+    this.owner.register(
+      'service:router',
+      class RouterServiceMock extends Service {
+        replaceWith() {
+          invocationArguments.push([...arguments]);
+        }
       }
-    }));
+    );
   });
 
   test('it will call replaceWith on the router service when invoked', async function(assert) {

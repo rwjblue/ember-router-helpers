@@ -10,11 +10,14 @@ module('transition-to', function(hooks) {
   hooks.beforeEach(function() {
     let invocationArguments = this.invocationArguments = [];
 
-    this.owner.register('service:router', Service.extend({
-      transitionTo() {
-        invocationArguments.push([...arguments]);
+    this.owner.register(
+      'service:router',
+      class RouterServiceMock extends Service {
+        transitionTo() {
+          invocationArguments.push([...arguments]);
+        }
       }
-    }));
+    );
   });
 
   test('it will call transitionTo on the router service when invoked', async function(assert) {
