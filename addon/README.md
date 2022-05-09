@@ -24,9 +24,9 @@ Usage
 * `route-params`
 
 ```hbs
-{{#with (route-params "parent.child") as |routeParams|}}
+{{#let (route-params "parent.child") as |routeParams|}}
   <a href={{routeParams.url}} class={{if routeParams.isActive "active" "inactive"}}>Blah</a>
-{{/with}}
+{{/let}}
 ```
 
 * `transition-to`

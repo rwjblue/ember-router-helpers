@@ -24,18 +24,18 @@ module('helper:route-params', function() {
 
     test('route-params yields correct URL value', async function(assert) {
       await render(hbs`
-      {{#with (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params 'parent.child') as |routeParams|}}
         {{routeParams.url}}
-      {{/with}}`);
+      {{/let}}`);
 
       assert.strictEqual(this.element.textContent.trim(), '/child');
     });
 
     test('route-params yields correct URL value with query-params helper', async function(assert) {
       await render(hbs`
-      {{#with (route-params 'parent.child' (query-params foo="bar")) as |routeParams|}}
+      {{#let (route-params 'parent.child' (query-params foo="bar")) as |routeParams|}}
         {{routeParams.url}}
-      {{/with}}`);
+      {{/let}}`);
 
       assert.strictEqual(this.element.textContent.trim(), '/child?foo=bar');
     });
@@ -44,9 +44,9 @@ module('helper:route-params', function() {
       this.set('queryParams', { queryParams: { foo: 'bar' }});
 
       await render(hbs`
-      {{#with (route-params 'parent.child' queryParams) as |routeParams|}}
+      {{#let (route-params 'parent.child' queryParams) as |routeParams|}}
         {{routeParams.url}}
-      {{/with}}`);
+      {{/let}}`);
 
       assert.strictEqual(this.element.textContent.trim(), '/child?foo=bar');
     });
@@ -61,9 +61,9 @@ module('helper:route-params', function() {
       }
 
       await render(hbs`
-      {{#with (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params 'parent.child') as |routeParams|}}
         {{routeParams.url}}
-      {{/with}}`);
+      {{/let}}`);
     });
 
     test('route-params only calls transitionTo once per render', async function(assert) {
@@ -79,9 +79,9 @@ module('helper:route-params', function() {
       setRouteParamsClass(MockedRouteParams);
 
       await render(hbs`
-      {{#with (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params 'parent.child') as |routeParams|}}
         {{routeParams.transitionTo}}
-      {{/with}}`);
+      {{/let}}`);
     });
 
     test('route-params actions invoke transitionTo', async function(assert) {
@@ -98,9 +98,9 @@ module('helper:route-params', function() {
       setRouteParamsClass(MockedRouteParams);
 
       await render(hbs`
-      {{#with (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params 'parent.child') as |routeParams|}}
         <button {{action routeParams.transitionTo}}></button>
-      {{/with}}`);
+      {{/let}}`);
 
       await click('button');
     });
@@ -123,9 +123,9 @@ module('helper:route-params', function() {
       setRouteParamsClass(MockedRouteParams);
 
       await render(hbs`
-      {{#with (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params 'parent.child') as |routeParams|}}
         <a href="/" onclick={{routeParams.transitionTo}}></a>
-      {{/with}}`);
+      {{/let}}`);
 
       let element = this.element;
       element.addEventListener('click', (event) => {
@@ -148,9 +148,9 @@ module('helper:route-params', function() {
       setRouteParamsClass(MockedRouteParams);
 
       await render(hbs`
-      {{#with (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params 'parent.child') as |routeParams|}}
         {{routeParams.replaceWith}}
-      {{/with}}`);
+      {{/let}}`);
     });
 
     test('route-params actions invoke replaceWith', async function(assert) {
@@ -167,9 +167,9 @@ module('helper:route-params', function() {
       setRouteParamsClass(MockedRouteParams);
 
       await render(hbs`
-      {{#with (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params 'parent.child') as |routeParams|}}
         <button {{action routeParams.replaceWith}}></button>
-      {{/with}}`);
+      {{/let}}`);
 
       await click('button');
     });
@@ -187,9 +187,9 @@ module('helper:route-params', function() {
       router.set('_router.currentURL', currentURL);
 
       await render(hbs`
-      {{#with (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params 'parent.child') as |routeParams|}}
         <a href="{{routeParams.url}}" class="{{if routeParams.isActive 'active' 'inactive'}}">Blah</a>
-      {{/with}}`);
+      {{/let}}`);
 
       assert.dom('a').hasClass('active');
 
