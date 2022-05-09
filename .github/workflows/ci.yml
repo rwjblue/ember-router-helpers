@@ -19,7 +19,9 @@ jobs:
       - uses: volta-cli/action@v1
       - run: yarn install --frozen-lockfile
       - run: yarn lint
+        working-directory: addon
       - run: yarn test:ember
+        working-directory: test-app
 
   floating-dependencies:
     name: "Floating Dependencies"
@@ -30,6 +32,7 @@ jobs:
       - uses: volta-cli/action@v1
       - run: yarn install --no-lockfile
       - run: yarn test:ember
+        working-directory: test-app
 
   try-scenarios:
     name: "Try: ${{ matrix.ember-try-scenario }}"
@@ -53,9 +56,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: volta-cli/action@v1
-        with:
-          node-version: 12.x
       - name: install dependencies
         run: yarn install --frozen-lockfile
       - name: test
         run: node_modules/.bin/ember try:one ${{ matrix.ember-try-scenario }} --skip-cleanup
+        working-directory: test-app

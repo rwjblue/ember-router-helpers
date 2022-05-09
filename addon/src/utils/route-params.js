@@ -23,7 +23,10 @@ export default class RouteParams {
   get transitionTo() {
     if (this._transitionTo === undefined) {
       this._transitionTo = (maybeEvent) => {
-        if (maybeEvent !== undefined && typeof maybeEvent.preventDefault === 'function') {
+        if (
+          maybeEvent !== undefined &&
+          typeof maybeEvent.preventDefault === 'function'
+        ) {
           maybeEvent.preventDefault();
         }
         return this._router.transitionTo(...this._params);
