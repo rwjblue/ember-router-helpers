@@ -1,11 +1,6 @@
 import { inject as service } from '@ember/service';
 import Helper from '@ember/component/helper';
-import _RouteParams from '../utils/route-params';
-
-let RouteParams = _RouteParams;
-export function setRouteParamsClass(klass) {
-  RouteParams = klass;
-}
+import RouteParams from '../utils/route-params';
 
 export default class RouteParamsHelper extends Helper {
   @service router;

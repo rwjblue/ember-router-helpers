@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest, setupApplicationTest } from 'ember-qunit';
 import { click, render, visit, waitFor, settled } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { setRouteParamsClass } from 'ember-router-helpers/helpers/route-params';
+import RouteParamsHelper from 'ember-router-helpers/helpers/route-params';
 import RouteParams from 'ember-router-helpers/utils/route-params';
 import { defer } from '../../helpers';
 import EmberRouter from '@ember/routing/router';
@@ -15,10 +15,6 @@ module('helper:route-params', function () {
     hooks.beforeEach(function () {
       // eslint-disable-next-line ember/no-private-routing-service
       this.owner.lookup('router:main').setupRouter();
-    });
-
-    hooks.afterEach(function () {
-      setRouteParamsClass(RouteParams);
     });
 
     test('route-params yields correct URL value', async function (assert) {
@@ -74,13 +70,20 @@ module('helper:route-params', function () {
           return super.transitionTo;
         }
       }
+      class RouteParamsMockHelper extends RouteParamsHelper {
+        compute(params) {
+          return new MockedRouteParams(this.router, params);
+        }
+      }
 
-      setRouteParamsClass(MockedRouteParams);
+      this.owner.register('helper:route-params-mock', RouteParamsMockHelper);
 
       await render(hbs`
-      {{#let (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params-mock 'parent.child') as |routeParams|}}
         {{routeParams.transitionTo}}
       {{/let}}`);
+
+      this.owner.unregister('helper:route-params-mock');
     });
 
     test('route-params actions invoke transitionTo', async function (assert) {
@@ -94,14 +97,22 @@ module('helper:route-params', function () {
         }
       }
 
-      setRouteParamsClass(MockedRouteParams);
+      class RouteParamsMockHelper extends RouteParamsHelper {
+        compute(params) {
+          return new MockedRouteParams(this.router, params);
+        }
+      }
+
+      this.owner.register('helper:route-params-mock', RouteParamsMockHelper);
 
       await render(hbs`
-      {{#let (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params-mock 'parent.child') as |routeParams|}}
         <button {{action routeParams.transitionTo}}></button>
       {{/let}}`);
 
       await click('button');
+
+      this.owner.unregister('helper:route-params-mock');
     });
 
     test('calls preventDefault on event (e.g. `onclick={{routeParams.transitionTo}}`)', async function (assert) {
@@ -119,10 +130,16 @@ module('helper:route-params', function () {
         }
       }
 
-      setRouteParamsClass(MockedRouteParams);
+      class RouteParamsMockHelper extends RouteParamsHelper {
+        compute(params) {
+          return new MockedRouteParams(this.router, params);
+        }
+      }
+
+      this.owner.register('helper:route-params-mock', RouteParamsMockHelper);
 
       await render(hbs`
-      {{#let (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params-mock 'parent.child') as |routeParams|}}
         <a href="/" onclick={{routeParams.transitionTo}}></a>
       {{/let}}`);
 
@@ -135,6 +152,8 @@ module('helper:route-params', function () {
       });
 
       await click('a');
+
+      this.owner.unregister('helper:route-params-mock');
     });
 
     test('route-params only calls replaceWith once per render', async function (assert) {
@@ -147,12 +166,20 @@ module('helper:route-params', function () {
         }
       }
 
-      setRouteParamsClass(MockedRouteParams);
+      class RouteParamsMockHelper extends RouteParamsHelper {
+        compute(params) {
+          return new MockedRouteParams(this.router, params);
+        }
+      }
+
+      this.owner.register('helper:route-params-mock', RouteParamsMockHelper);
 
       await render(hbs`
-      {{#let (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params-mock 'parent.child') as |routeParams|}}
         {{routeParams.replaceWith}}
       {{/let}}`);
+
+      this.owner.unregister('helper:route-params-mock');
     });
 
     test('route-params actions invoke replaceWith', async function (assert) {
@@ -166,14 +193,22 @@ module('helper:route-params', function () {
         }
       }
 
-      setRouteParamsClass(MockedRouteParams);
+      class RouteParamsMockHelper extends RouteParamsHelper {
+        compute(params) {
+          return new MockedRouteParams(this.router, params);
+        }
+      }
+
+      this.owner.register('helper:route-params-mock', RouteParamsMockHelper);
 
       await render(hbs`
-      {{#let (route-params 'parent.child') as |routeParams|}}
+      {{#let (route-params-mock 'parent.child') as |routeParams|}}
         <button {{action routeParams.replaceWith}}></button>
       {{/let}}`);
 
       await click('button');
+
+      this.owner.unregister('helper:route-params-mock');
     });
 
     test('route-params yields correct isActive value', async function (assert) {
