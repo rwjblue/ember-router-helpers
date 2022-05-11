@@ -1,6 +1,7 @@
 {
   "name": "test-app",
   "version": "0.4.0",
+  "private": true,
   "description": "Template helpers utilizing the router service.",
   "homepage": "https://github.com/rwjblue/ember-router-helpers#readme",
   "bugs": {
@@ -25,9 +26,10 @@
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
     "start": "yarn ember serve",
-    "test": "npm-run-all lint test:*",
+    "test": "npm-run-all lint \"test:!(watch)\"",
     "test:ember": "ember test",
-    "test:ember-compatibility": "ember try:each"
+    "test:ember-compatibility": "ember try:each",
+    "test:watch": "ember test --server"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
