@@ -33,8 +33,17 @@ module('helper:route-params', function () {
     });
 
     test('route-params yields correct URL value with query-params helper', async function (assert) {
+      // legacy query-params helper replacement
+      // https://deprecations.emberjs.com/v3.x#toc_ember-glimmer-link-to-positional-arguments
+      // `(query-params foo="bar")`
+      this.set('queryParams', {
+        isQueryParams: true,
+        values: {
+          foo: 'bar',
+        },
+      });
       await render(hbs`
-      {{#let (route-params 'parent.child' (query-params foo="bar")) as |routeParams|}}
+      {{#let (route-params 'parent.child' this.queryParams) as |routeParams|}}
         {{routeParams.url}}
       {{/let}}`);
 

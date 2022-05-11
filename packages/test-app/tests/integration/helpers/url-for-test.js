@@ -18,7 +18,16 @@ module('helper:url-for', function (hooks) {
   });
 
   test('it can generate urls with query params', async function (assert) {
-    await render(hbs`{{url-for 'parent.child' (query-params foo="bar")}}`);
+    // legacy query-params helper replacement
+    // https://deprecations.emberjs.com/v3.x#toc_ember-glimmer-link-to-positional-arguments
+    // `(query-params foo="bar")`
+    this.set('queryParams', {
+      isQueryParams: true,
+      values: {
+        foo: 'bar',
+      },
+    });
+    await render(hbs`{{url-for 'parent.child' this.queryParams}}`);
 
     assert.dom(this.element).hasText('/child?foo=bar');
   });
