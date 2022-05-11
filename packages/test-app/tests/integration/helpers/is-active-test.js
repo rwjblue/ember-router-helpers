@@ -34,7 +34,7 @@ module('helper:is-active', function () {
 
       router.set('currentURL', '/foo');
       this.set('targetRoute', 'bar');
-      await render(hbs`{{is-active targetRoute}}`);
+      await render(hbs`{{is-active this.targetRoute}}`);
 
       assert.strictEqual(
         this.element.textContent,

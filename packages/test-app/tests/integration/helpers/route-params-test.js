@@ -45,7 +45,7 @@ module('helper:route-params', function () {
       this.set('queryParams', { queryParams: { foo: 'bar' } });
 
       await render(hbs`
-      {{#let (route-params 'parent.child' queryParams) as |routeParams|}}
+      {{#let (route-params 'parent.child' this.queryParams) as |routeParams|}}
         {{routeParams.url}}
       {{/let}}`);
 
