@@ -71,10 +71,7 @@
       "./helpers/root-url.js": "./dist/_app_/helpers/root-url.js",
       "./helpers/route-params.js": "./dist/_app_/helpers/route-params.js",
       "./helpers/transition-to.js": "./dist/_app_/helpers/transition-to.js",
-      "./helpers/url-for.js": "./dist/_app_/helpers/url-for.js",
-      "./utils/handle-query-params.js": "./dist/_app_/utils/handle-query-params.js",
-      "./utils/route-params.js": "./dist/_app_/utils/route-params.js",
-      "./utils/track-active-route.js": "./dist/_app_/utils/track-active-route.js"
+      "./helpers/url-for.js": "./dist/_app_/helpers/url-for.js"
     }
   },
   "volta": {
