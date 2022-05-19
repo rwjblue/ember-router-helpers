@@ -35,7 +35,13 @@
         "infile": "CHANGELOG.md",
         "launchEditor": false
       },
-      "release-it-yarn-workspaces": true
+      "release-it-yarn-workspaces": {
+        "workspaces": ["packages/ember-truth-helpers"],
+        "additionalManifests": {
+          "dependencyUpdates": ["packages/test-app/package.json"],
+          "versionUpdates": ["packages/test-app/package.json"]
+        }
+      }
     },
     "git": {
       "tagName": "v${version}"
