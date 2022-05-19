@@ -36,7 +36,7 @@
         "launchEditor": false
       },
       "release-it-yarn-workspaces": {
-        "workspaces": ["packages/ember-truth-helpers"],
+        "workspaces": ["packages/ember-router-helpers"],
         "additionalManifests": {
           "dependencyUpdates": ["packages/test-app/package.json"],
           "versionUpdates": ["packages/test-app/package.json"]
