@@ -5,9 +5,10 @@
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.13 or above
-* Ember CLI v3.12 or above
-* Node.js v10 or above
+* Ember.js v3.20 or above
+* Ember CLI v3.20 or above
+* ember-auto-import >= 2
+* Node.js v12 or above
 
 
 Installation
@@ -23,9 +24,9 @@ Usage
 * `route-params`
 
 ```hbs
-{{#with (route-params "parent.child") as |routeParams|}}
+{{#let (route-params "parent.child") as |routeParams|}}
   <a href={{routeParams.url}} class={{if routeParams.isActive "active" "inactive"}}>Blah</a>
-{{/with}}
+{{/let}}
 ```
 
 * `transition-to`

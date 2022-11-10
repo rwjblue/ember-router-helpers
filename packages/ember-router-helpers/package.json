@@ -1,0 +1,80 @@
+{
+  "name": "ember-router-helpers",
+  "version": "0.4.0",
+  "description": "Template helpers utilizing the router service.",
+  "keywords": [
+    "ember-addon"
+  ],
+  "homepage": "https://github.com/rwjblue/ember-router-helpers#readme",
+  "bugs": {
+    "url": "https://github.com/rwjblue/ember-router-helpers/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rwjblue/ember-router-helpers.git"
+  },
+  "license": "MIT",
+  "author": "Robert Jackson <me@rwjblue.com>",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*",
+    "./test-support": "./dist/test-support/index.js",
+    "./addon-main.js": "./addon-main.js"
+  },
+  "files": [
+    "addon-main.js",
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup --config",
+    "copyDoc": "cp ../../*.md .",
+    "lint": "npm-run-all --aggregate-output --continue-on-error --parallel \"lint:!(fix)\"",
+    "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
+    "lint:js": "eslint . --cache",
+    "lint:js:fix": "eslint . --fix",
+    "start": "rollup --config --watch",
+    "test": "echo 'A v2 addon does not have tests, run tests in test-app'",
+    "prepare": "npm-run-all --aggregate-output --continue-on-error --parallel copyDoc build"
+  },
+  "dependencies": {
+    "@embroider/addon-shim": "^1.6.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-proposal-decorators": "^7.17.9",
+    "@embroider/addon-dev": "^1.6.0",
+    "@rollup/plugin-babel": "^5.3.1",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-ember": "^10.6.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.6.2",
+    "rollup": "^2.71.1"
+  },
+  "engines": {
+    "node": "12.* || 14.* || >= 16"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "ember-addon": {
+    "main": "addon-main.js",
+    "type": "addon",
+    "version": 2,
+    "app-js": {
+      "./helpers/is-active.js": "./dist/_app_/helpers/is-active.js",
+      "./helpers/replace-with.js": "./dist/_app_/helpers/replace-with.js",
+      "./helpers/root-url.js": "./dist/_app_/helpers/root-url.js",
+      "./helpers/route-params.js": "./dist/_app_/helpers/route-params.js",
+      "./helpers/transition-to.js": "./dist/_app_/helpers/transition-to.js",
+      "./helpers/url-for.js": "./dist/_app_/helpers/url-for.js"
+    }
+  },
+  "volta": {
+    "extends": "../../package.json"
+  }
+}
