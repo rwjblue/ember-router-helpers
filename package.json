@@ -1,6 +1,12 @@
 {
   "private": true,
-  "workspaces": ["packages/*"],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rwjblue/ember-router-helpers.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "prepare": "yarn workspace ember-router-helpers run prepare",
     "start": "npm-run-all --parallel start:*",
@@ -19,29 +25,26 @@
     "test:watch:addon": "yarn workspace ember-router-helpers run start",
     "release": "release-it"
   },
+  "devDependencies": {
+    "@release-it-plugins/lerna-changelog": "^5.0.0",
+    "@release-it-plugins/workspaces": "^3.2.0",
+    "npm-run-all": "^4.1.5",
+    "release-it": "^15.5.0"
+  },
   "volta": {
     "node": "16.14.2",
     "yarn": "1.22.17"
   },
-  "devDependencies": {
-    "npm-run-all": "^4.1.5",
-    "release-it": "^14.0.0",
-    "release-it-lerna-changelog": "^4.0.1",
-    "release-it-yarn-workspaces": "^2.0.1"
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "release-it": {
     "plugins": {
-      "release-it-lerna-changelog": {
+      "@release-it-plugins/lerna-changelog": {
         "infile": "CHANGELOG.md",
         "launchEditor": false
       },
-      "release-it-yarn-workspaces": {
-        "workspaces": ["packages/ember-router-helpers"],
-        "additionalManifests": {
-          "dependencyUpdates": ["packages/test-app/package.json"],
-          "versionUpdates": ["packages/test-app/package.json"]
-        }
-      }
+      "@release-it-plugins/workspaces": true
     },
     "git": {
       "tagName": "v${version}"
@@ -49,6 +52,7 @@
     "github": {
       "release": true,
       "tokenRef": "GITHUB_AUTH"
-    }
+    },
+    "npm": false
   }
 }
